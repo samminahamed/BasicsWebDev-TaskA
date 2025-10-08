@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task D - Practicing CSS Selectors</title>
+  <style>
+    /* Element selector */
+    p {
+      color: darkblue;
+      font-size: 18px;
+    }
+
+    /* Class selector */
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+
+    /* ID selector */
+    #special {
+      color: crimson;
+      text-transform: uppercase;
+    }
+
+    /* Attribute selector */
+    a[target="_blank"] {
+      color: green;
+      text-decoration: none;
+    }
+
+    /* Descendant selector */
+    div p {
+      border-left: 3px solid gray;
+      padding-left: 10px;
+    }
+
+    /* Pseudo-class selector */
+    li:hover {
+      color: orange;
+      cursor: pointer;
+    }
+
+    /* Pseudo-element selector */
+    p::first-line {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Practicing CSS Selectors</h1>
+  <p>This is a regular paragraph demonstrating <span class="highlight">class selectors</span>.</p>
+  <p id="special">This text is styled using an ID selector.</p>
+
+  <div>
+    <p>This paragraph is inside a div and styled with a descendant selector.</p>
+  </div>
+
+  <a href="https://centria.fi" target="_blank">Visit Centria</a>
+  <a href="https://github.com">Visit GitHub</a>
+
+  <ul>
+    <li>Hover over this item</li>
+    <li>Hover over this one too!</li>
+  </ul>
+
+  <p>Here’s another paragraph to show how <span class="highlight">first-line</span> and <span class="highlight">hover</span> effects work together.</p>
+
+  <footer>
+    <p>Created by <strong>Sammin Ahamed</strong></p>
+  </footer>
+</body>
+</html>
