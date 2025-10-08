@@ -1,0 +1,26 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 30px;
+}
+
+h1 {
+  color: darkblue;
+}
+
+h2 {
+  color: #006400;
+}
+
+p {
+  line-height: 1.6;
+}
+
+a {
+  color: crimson;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
