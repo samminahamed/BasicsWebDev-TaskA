@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Task‑E • Weekly Timetable – Sammin Ahamed</title>
+  <meta name="description" content="Basics of Web Development • Task E • Weekly Timetable by Sammin Ahamed" />
+  <style>
+    :root{
+      --bg: #0b1020;
+      --panel: #121933;
+      --text: #e7ecff;
+      --muted:#b9c2ff;
+      --accent:#6aa9ff;
+      --accent-2:#9be7ff;
+      --ok:#49d17a;
+      --warn:#ffd166;
+      --danger:#ff7b7b;
+      --grid:#1c2550;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text); background:linear-gradient(180deg, #070a16, var(--bg));
+    }
+    .container{max-width:1100px; margin:40px auto; padding:24px; background:color-mix(in oklab, var(--panel) 92%, black 8%); border-radius:20px; box-shadow:0 10px 40px rgba(0,0,0,.35);}
+    header{display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between; margin-bottom:22px}
+    header h1{font-size:clamp(1.2rem, 2vw + 1rem, 2rem); line-height:1.2; margin:0}
+    header .meta{font-size:.95rem; color:var(--muted)}
+    .badge{padding:6px 10px; border-radius:999px; background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#081024; font-weight:700; letter-spacing:.2px}
+
+    .table-wrap{overflow:auto; border-radius:14px; border:1px solid color-mix(in oklab, var(--grid) 80%, white 20%);}
+    table{border-collapse:separate; border-spacing:0; width:100%; min-width:820px; background: #0e1530}
+    caption{caption-side:top; text-align:left; padding:14px 16px; font-weight:700; color:var(--accent);}
+    thead th{position:sticky; top:0; background:linear-gradient(180deg, #10183a, #0e1530);}
+    th, td{padding:14px 16px; text-align:left; border-bottom:1px solid var(--grid);} 
+    th{font-weight:700; color:var(--muted)}
+    tbody tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+    td.time{white-space:nowrap; width:120px; font-feature-settings:"tnum" 1; font-variant-numeric: tabular-nums; color:var(--muted)}
+
+    /* Pills for course blocks */
+    .slot{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:10px; font-weight:600; background: color-mix(in oklab, var(--accent) 25%, transparent); border:1px solid color-mix(in oklab, var(--accent) 45%, transparent);}
+    .slot svg{inline-size:18px; block-size:18px; opacity:.9}
+    .lab{background: color-mix(in oklab, var(--ok) 18%, transparent); border-color: color-mix(in oklab, var(--ok) 30%, transparent)}
+    .deadline{background: color-mix(in oklab, var(--danger) 18%, transparent); border-color: color-mix(in oklab, var(--danger) 30%, transparent)}
+    .self{background: color-mix(in oklab, var(--warn) 20%, transparent); border-color: color-mix(in oklab, var(--warn) 35%, transparent)}
+
+    /* Legend */
+    .legend{display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 4px}
+    .legend .slot{font-weight:700}
+
+    /* Footer */
+    footer{margin-top:18px; color:var(--muted); font-size:.95rem}
+    .note{margin-top:10px; border-left:4px solid var(--accent); padding:10px 12px; background:rgba(255,255,255,.03); border-radius:10px}
+
+    /* Focus styles */
+    a, button, .slot{outline:none}
+    .slot:focus{box-shadow:0 0 0 3px color-mix(in oklab, var(--accent) 40%, transparent)}
+
+    /* Print (A4 landscape) */
+    @media print{
+      body{background:#fff; color:#000}
+      .container{box-shadow:none; background:#fff}
+      .table-wrap{border:1px solid #ccc}
+      thead th{background:#f7f7f7; color:#000}
+      .slot, .lab, .deadline, .self{color:#000; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+      header .badge{background:#000; color:#fff}
+    }
+  </style>
+</head>
+<body>
+  <main class="container" aria-labelledby="page-title">
+    <header>
+      <h1 id="page-title">Task‑E: Weekly Timetable <span class="badge" aria-label="course">Basics of Web Development</span></h1>
+      <div class="meta">
+        Student: <strong>Sammin Ahamed</strong><br/>
+        Updated: <time datetime="2025-10-23">23 Oct 2025</time>
+      </div>
+    </header>
+
+    <p>This page presents a clean, accessible weekly timetable using semantic HTML (<code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;caption&gt;</code>, <code>&lt;th scope&gt;</code>) and responsive CSS. It’s optimized for both screen and print.</p>
+
+    <div class="legend" aria-label="Legend">
+      <span class="slot" aria-label="Lecture badge">📘 Lecture</span>
+      <span class="slot lab" aria-label="Lab badge">🧪 Lab</span>
+      <span class="slot self" aria-label="Self‑study badge">🧭 Self‑study</span>
+      <span class="slot deadline" aria-label="Deadline badge">⏱ Deadline</span>
+    </div>
+
+    <div class="table-wrap" role="region" aria-labelledby="caption" tabindex="0">
+      <table>
+        <caption id="caption">Weekly Timetable (Mon–Fri)</caption>
+        <colgroup>
+          <col span="1" style="width:120px" />
+          <col span="5" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="time">08:00 – 09:00</th>
+            <td></td>
+            <td><span class="slot">📘 HTML &amp; Accessibility</span></td>
+            <td></td>
+            <td></td>
+            <td><span class="slot self">🧭 Weekly Review</span></td>
+          </tr>
+          <tr>
+            <th scope="row" class="time">09:00 – 10:00</th>
+            <td><span class="slot">📘 CSS Basics</span></td>
+            <td></td>
+            <td><span class="slot lab">🧪 Lab: Flexbox</span></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row" class="time">10:00 – 11:00</th>
+            <td></td>
+            <td><span class="slot lab">🧪 Lab: Grid</span></td>
+            <td></td>
+            <td><span class="slot">📘 Responsive Design</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row" class="time">11:00 – 12:00</th>
+            <td><span class="slot self">🧭 Self‑study</span></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row" class="time">12:00 – 13:00</th>
+            <td colspan="5">— Lunch —</td>
+          </tr>
+          <tr>
+            <th scope="row" class="time">13:00 – 14:00</th>
+            <td></td>
+            <td></td>
+            <td><span class="slot">📘 Forms &amp; Tables</span></td>
+            <td></td>
+            <td><span class="slot deadline">⏱ Task‑E Due</span></td>
+          </tr>
+          <tr>
+            <th scope="row" class="time">14:00 – 15:00</th>
+            <td><span class="slot lab">🧪 Lab: Media Queries</span></td>
+            <td></td>
+            <td></td>
+            <td><span class="slot self">🧭 Project Work</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th scope="row" class="time">15:00 – 16:00</th>
+            <td></td>
+            <td><span class="slot">📘 Semantic HTML</span></td>
+            <td></td>
+            <td></td>
+            <td><span class="slot lab">🧪 Lab: Print Styles</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <p><strong>Submission options:</strong> Host on Azure Static Web Apps and submit the URL, or submit the RAW link to <code>task-e/index.html</code> in your Git repository.</p>
+      <div class="note" role="note">
+        <p><strong>Screenshot requirement:</strong> take a screenshot of this page open in your browser and include it with the submission (per assignment update 25.9.2025).</p>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
